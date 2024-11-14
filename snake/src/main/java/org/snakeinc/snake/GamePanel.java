@@ -19,8 +19,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public static final int TILE_SIZE = 25;
     public static final int GAME_WIDTH = 600;
     public static final int GAME_HEIGHT = 600;
-    private final int MAX_TILES = (GAME_WIDTH * GAME_HEIGHT) / (TILE_SIZE * TILE_SIZE);
-
     private Timer timer;
     private Snake snake;
     private Apple apple;
@@ -57,7 +55,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
     private void gameOver(Graphics g) {
         g.setColor(Color.RED);
-        g.setFont(new Font("Arial", Font.BOLD, 40));
+        g.setFont(new Font("Arial", Font.BOLD, 20));
         FontMetrics metrics = getFontMetrics(g.getFont());
         g.drawString("Game Over", (GAME_WIDTH - metrics.stringWidth("Game Over")) / 2, GAME_HEIGHT / 2);
     }
@@ -72,7 +70,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         if (snake.getHeadX() == apple.getX() && snake.getHeadY() == apple.getY()) {
             snake.eat(apple);
             apple.updateLocation();
-            System.out.println(apple.getX() + "," + apple.getY());
         }
     }
 
@@ -110,6 +107,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
                 break;
         }
     }
+
+}
 
     @Override
     public void keyReleased(KeyEvent e) {

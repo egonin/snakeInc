@@ -16,8 +16,8 @@ public class Apple {
     }
 
     public void updateLocation() {
-        x = random.nextInt(0, (GamePanel.GAME_WIDTH / GamePanel.TILE_SIZE) - 1) * GamePanel.TILE_SIZE;
-        y = random.nextInt(0, (GamePanel.GAME_HEIGHT / GamePanel.TILE_SIZE) - 1) * GamePanel.TILE_SIZE;
+        x = random.nextInt(0, (GamePanel.GAME_WIDTH / GamePanel.TILE_SIZE)) * GamePanel.TILE_SIZE;
+        y = random.nextInt(0, (GamePanel.GAME_HEIGHT / GamePanel.TILE_SIZE)) * GamePanel.TILE_SIZE;
     }
 
     public int getX() {
