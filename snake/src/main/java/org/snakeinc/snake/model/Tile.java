@@ -27,14 +27,6 @@ public class Tile {
         return new Tile(this.X, this.Y);
     }
 
-    public int getUpperPixelX() {
-        return X * GamePanel.TILE_SIZE;
-    }
-
-    public int getUpperPixelY() {
-        return Y * GamePanel.TILE_SIZE;
-    }
-
     public void setX(int X) {
         this.X = X;
         upperPixelX = X * GamePanel.TILE_SIZE;
