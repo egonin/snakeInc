@@ -16,9 +16,11 @@ import org.snakeinc.snake.model.Snake;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
-    public static final int TILE_SIZE = 25;
-    public static final int GAME_WIDTH = 600;
-    public static final int GAME_HEIGHT = 600;
+    public static final int TILE_SIZE = 20;
+    public static final int N_TILES_X = 25;
+    public static final int N_TILES_Y = 25;
+    public static final int GAME_WIDTH = TILE_SIZE * N_TILES_X;
+    public static final int GAME_HEIGHT = TILE_SIZE * N_TILES_Y;
     private Timer timer;
     private Snake snake;
     private Apple apple;
@@ -62,12 +64,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
     private void checkCollision() {
         // Vérifie si le serpent se mord ou sort de l'écran
-        if (snake.checkSelfCollision() || snake.checkWallCollision(GAME_WIDTH, GAME_HEIGHT)) {
+        if (snake.checkSelfCollision() || snake.checkWallCollision()) {
             running = false;
             timer.stop();
         }
         // Vérifie si le serpent mange la pomme
-        if (snake.getHeadX() == apple.getX() && snake.getHeadY() == apple.getY()) {
+        if (snake.getHead().equals(apple.getPosition())) {
             snake.eat(apple);
             apple.updateLocation();
         }
