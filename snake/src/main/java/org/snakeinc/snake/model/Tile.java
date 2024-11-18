@@ -10,10 +10,10 @@ import org.snakeinc.snake.GamePanel;
 public class Tile {
 
     @Getter
-    private int X;
+    private int x;
 
     @Getter
-    private int Y;
+    private int y;
 
     private int upperPixelX;
     private int upperPixelY;
@@ -24,16 +24,16 @@ public class Tile {
     }
 
     public Tile copy() {
-        return new Tile(this.X, this.Y);
+        return new Tile(this.x, this.y);
     }
 
     public void setX(int X) {
-        this.X = X;
+        this.x = X;
         upperPixelX = X * GamePanel.TILE_SIZE;
     }
 
     public void setY(int Y) {
-        this.Y = Y;
+        this.y = Y;
         upperPixelY = Y * GamePanel.TILE_SIZE;
     }
 
@@ -46,7 +46,7 @@ public class Tile {
     }
 
     public boolean isInsideGame() {
-        return (((X > 0) && (X < GamePanel.N_TILES_X)) && ((Y > 0) && (Y < GamePanel.N_TILES_Y)));
+        return (((x > 0) && (x < GamePanel.N_TILES_X)) && ((y > 0) && (y < GamePanel.N_TILES_Y)));
     }
 
     @Override
@@ -58,11 +58,11 @@ public class Tile {
             return false;
         }
         Tile tile = (Tile) o;
-        return X == tile.X && Y == tile.Y;
+        return x == tile.x && y == tile.y;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(X, Y);
+        return Objects.hash(x, y);
     }
 }
