@@ -18,8 +18,7 @@ public class Apple {
     }
 
     public void updateLocation() {
-        position = new Tile(random.nextInt(0, (GamePanel.GAME_WIDTH / GamePanel.TILE_SIZE)),
-                random.nextInt(0, (GamePanel.GAME_HEIGHT / GamePanel.TILE_SIZE)));
+        position = new Tile(12,12);
 
     }
 

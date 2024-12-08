@@ -14,7 +14,7 @@ public class Snake {
     }
 
     public Tile getHead() {
-        return body.getFirst();
+        return body.get(0);
     }
 
     public void eat(Apple apple) {
@@ -39,8 +39,8 @@ public class Snake {
                 break;
         }
 
-        body.addFirst(newHead);
-        body.removeLast(); // Supprime le dernier segment pour simuler le déplacement
+        body.add(0,newHead);
+        body.remove(body.size() -1); // Supprime le dernier segment pour simuler le déplacement
     }
 
     public void draw(Graphics g) {
