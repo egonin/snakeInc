@@ -13,6 +13,10 @@ public class Snake {
         body.add(new Tile(5, 5)); // La tête du serpent
     }
 
+    public ArrayList<Tile> getBody() {
+        return body;
+    }
+
     public Tile getHead() {
         return body.getFirst();
     }
@@ -32,7 +36,7 @@ public class Snake {
                 newHead.setY(newHead.getY() + 1);
                 break;
             case 'L':
-                newHead.setX(newHead.getX() - 1);
+                newHead.setX(newHead.getX() + 1);
                 break;
             case 'R':
                 newHead.setX(newHead.getX() + 1);
