@@ -11,7 +11,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import java.util.Random;
+
+import org.snakeinc.snake.model.Anaconda;
+import org.snakeinc.snake.model.Edible;
 import org.snakeinc.snake.model.Apple;
+import org.snakeinc.snake.model.Brocoli;
+import org.snakeinc.snake.model.BoaConstrictor;
+import org.snakeinc.snake.model.Python;
 import org.snakeinc.snake.model.Snake;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
@@ -23,9 +30,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public static final int GAME_HEIGHT = TILE_SIZE * N_TILES_Y;
     private Timer timer;
     private Snake snake;
-    private Apple apple;
+    private Edible edible;
     private boolean running = false;
     private char direction = 'R';
+    private boolean gameOver = false;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
@@ -36,9 +44,32 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         startGame();
     }
 
+    
+    private Random random = new Random();
+
     private void startGame() {
-        snake = new Snake();
-        apple = new Apple();
+        // snake = new Python();
+        int objectType = random.nextInt(3);
+        int edibleType = random.nextInt(2);
+        switch (objectType) {
+            case 0:
+                snake = new Anaconda();
+                break;
+            case 1:
+                snake = new Python();
+                break;
+            case 2:
+                snake = new BoaConstrictor();
+                break;
+        }
+        switch (edibleType) {
+            case 0:
+                edible = new Brocoli();
+                break;
+            case 1:
+                edible = new Apple();
+                break;
+        }
         timer = new Timer(100, this);
         timer.start();
         running = true;
@@ -48,9 +79,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (running) {
-            apple.draw(g);
+            edible.draw(g);
             snake.draw(g);
-        } else {
+        } else{
+            gameOver=true;
             gameOver(g);
         }
     }
@@ -60,6 +92,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         g.setFont(new Font("Arial", Font.BOLD, 20));
         FontMetrics metrics = getFontMetrics(g.getFont());
         g.drawString("Game Over", (GAME_WIDTH - metrics.stringWidth("Game Over")) / 2, GAME_HEIGHT / 2);
+        g.setColor(Color.GREEN);
+        g.setFont(new Font("Arial", Font.BOLD, 15));
+        g.drawString("Press any key to play again", (GAME_WIDTH - metrics.stringWidth("Press any key to play again")) / 2, GAME_HEIGHT * 3/4);
+
     }
 
     private void checkCollision() {
@@ -69,9 +105,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
             timer.stop();
         }
         // Vérifie si le serpent mange la pomme
-        if (snake.getHead().equals(apple.getPosition())) {
-            snake.eat(apple);
-            apple.updateLocation();
+        if (snake.getHead().equals(edible.getPosition())) {
+            edible.beEatenBy(snake);
+            Random random = new Random();
+            int edibleType = random.nextInt(2);
+            switch (edibleType) {
+                case 0:
+                    edible = new Brocoli();
+                    break;
+                case 1:
+                    edible = new Apple();
+                    break;
+            }
+            edible.updateLocation();
         }
     }
 
@@ -88,24 +134,24 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_LEFT:
-                if (direction != 'R') {
+                // if (direction != 'R') {
                     direction = 'L';
-                }
+                // }
                 break;
             case KeyEvent.VK_RIGHT:
-                if (direction != 'L') {
+                // if (direction != 'L') {
                     direction = 'R';
-                }
+                // }
                 break;
             case KeyEvent.VK_UP:
-                if (direction != 'D') {
+                // if (direction != 'D') {
                     direction = 'U';
-                }
+                // }
                 break;
             case KeyEvent.VK_DOWN:
-                if (direction != 'U') {
+                // if (direction != 'U') {
                     direction = 'D';
-                }
+                // }
                 break;
         }
     }
@@ -116,5 +162,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
+        System.err.println(gameOver);
+        if (!gameOver) return;
+        gameOver = false;
+        startGame();
     }
 }

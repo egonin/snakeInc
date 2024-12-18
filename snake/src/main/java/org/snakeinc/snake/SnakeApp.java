@@ -13,5 +13,6 @@ public class SnakeApp {
         frame.setSize(GamePanel.GAME_WIDTH, GamePanel.GAME_HEIGHT);
         frame.setVisible(true);
         frame.setResizable(false);
+        frame.pack();
     }
 }
