@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import javax.xml.crypto.AlgorithmMethod;
 
+import lombok.Getter;
+
 public abstract class Snake implements AlimentEater {
 
     protected final ArrayList<Tile> body;
@@ -21,6 +23,14 @@ public abstract class Snake implements AlimentEater {
 
     public Tile getHead() {
         return body.getFirst();
+    }
+
+    @Getter
+    private int score=0;
+
+    @Override
+    public void incrementScore(){
+        this.score++;
     }
 
     // public abstract void eat(Edible edible);

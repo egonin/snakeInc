@@ -23,6 +23,7 @@ public abstract class Edible {
         } else if (this instanceof Brocoli) {
             alimentEater.eat((Brocoli)this);
         }
+        alimentEater.incrementScore();
         
     };
 
