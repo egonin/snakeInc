@@ -9,6 +9,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.util.Random;
@@ -118,6 +126,33 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
                     break;
             }
             edible.updateLocation();
+        }
+    }
+
+    private void sendScoreToServer() {
+        try {
+            String snakeType = snake.getClass().getSimpleName().toLowerCase();
+            int score = snake.getScore();
+            URL url = new URL("http://localhost:8080/api/v1/scores");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setDoOutput(true);
+
+            String jsonInput = String.format("{\"snake\":\"%s\", \"score\":%d}", snakeType, score);
+            try (OutputStream os = conn.getOutputStream()) {
+                byte[] input = jsonInput.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED) {
+                System.out.println("Score sent successfully.");
+            } else {
+                System.out.println("Failed to send score: " + responseCode);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

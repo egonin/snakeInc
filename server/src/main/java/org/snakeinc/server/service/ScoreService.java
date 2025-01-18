@@ -1,4 +1,4 @@
-package main.java.org.snakeinc.server.service;
+package org.snakeinc.server.service;
 
 import java.util.List;
 import java.sql.SQLNonTransientConnectionException;
@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
-import main.java.org.snakeinc.server.model.ScoreBody;
-import main.java.org.snakeinc.server.model.ScoreEntity;
-import main.java.org.snakeinc.server.model.StatBody;
-import main.java.org.snakeinc.server.repository.MyFirstRepository;
+import org.snakeinc.server.model.ScoreBody;
+import org.snakeinc.server.model.ScoreEntity;
+import org.snakeinc.server.model.StatBody;
+import org.snakeinc.server.repository.MyFirstRepository;
 
 @Service
 public class ScoreService {

@@ -1,4 +1,4 @@
-package main.java.org.snakeinc.server.controller;
+package org.snakeinc.server.controller;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import main.java.org.snakeinc.server.service.ScoreService;
-import main.java.org.snakeinc.server.model.ScoreBody;
-import main.java.org.snakeinc.server.model.ScoreEntity;
-import main.java.org.snakeinc.server.model.StatBody;
+import org.snakeinc.server.service.ScoreService;
+import org.snakeinc.server.model.ScoreBody;
+import org.snakeinc.server.model.ScoreEntity;
+import org.snakeinc.server.model.StatBody;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

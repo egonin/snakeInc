@@ -1,4 +1,4 @@
-package main.java.org.snakeinc.server.model;
+package org.snakeinc.server.model;
 
 import java.lang.annotation.Inherited;
 
